@@ -102,10 +102,10 @@ function checkResult() {
         }
 
     }
-    container.innerHTML = `<div class="score" id="finalScore">
+    container.innerHTML = `
                                 <p class=final>Your Score is ${score} of ${questions.length}</p>
                                 <button type="submit" onclick="#" class="btn btn-primary">Try Again</button>
-                           </div>`;
+                           `;
 
 
 
