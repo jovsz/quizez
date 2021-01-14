@@ -94,7 +94,7 @@ function checkResult() {
     }
   }
 
-  container.innerHTML = "\n                                <p class=final>Your Score is ".concat(score, " of ").concat(questions.length, "</p>\n                                <button type=\"submit\" onclick=\"#\" class=\"btn btn-primary\">Try Again</button>\n                           ");
+  container.innerHTML = "\n                                <p class=final>Your final score is ".concat(score, " of ").concat(questions.length, "</p>\n                                <button type=\"submit\" onclick=\"getQuestions(), document.location.reload(true)\" class=\"btn btn-primary\">Try Again</button>\n                           ");
 }
 
 getCategory();

@@ -103,8 +103,8 @@ function checkResult() {
 
     }
     container.innerHTML = `
-                                <p class=final>Your Score is ${score} of ${questions.length}</p>
-                                <button type="submit" onclick="#" class="btn btn-primary">Try Again</button>
+                                <p class=final>Your final score is ${score} of ${questions.length}</p>
+                                <button type="submit" onclick="getQuestions(), document.location.reload(true)" class="btn btn-primary">Try Again</button>
                            `;
 
 
