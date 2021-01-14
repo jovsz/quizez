@@ -82,11 +82,9 @@ function checkResult() {
 
   for (var i = 0; i < questions.length; i++) {
     var result = document.getElementById("answer-".concat(i)).value;
-    console.log(result);
 
     if (result == '') {
-      alert('Please choose your answer to question: ' + (i + 1));
-      document.getElementById("answer-".concat(i)).focus;
+      alert('Please choose your answer to question: ' + (i + 1)); //document.getElementById(`answer-${i}`).focus;
     } else {
       if (result === questions[i].answer) {
         score += 1;
@@ -94,7 +92,7 @@ function checkResult() {
     }
   }
 
-  container.innerHTML = "\n                                <p class=final>Your final score is ".concat(score, " of ").concat(questions.length, "</p>\n                                <button type=\"submit\" onclick=\"getQuestions(), document.location.reload(true)\" class=\"btn btn-primary\">Try Again</button>\n                           ");
+  container.innerHTML = "\n                                <p class=final>Your final score is ".concat(score, " of ").concat(questions.length, "</p>\n                                <button type=\"submit\" onclick=\"getQuestions()\" class=\"btn btn-primary\">Try Again</button>\n                                <button type=\"submit\" onclick=\"document.location.reload(true)\" class=\"btn btn-primary\">Select other categorie</button>\n                           ");
 }
 
 getCategory();

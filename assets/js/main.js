@@ -89,10 +89,10 @@ function checkResult() {
     const container = document.getElementById('finalScore');
     for (let i = 0; i < questions.length; i++) {
         const result = document.getElementById(`answer-${i}`).value;
-        console.log(result);
+
         if (result == '') {
             alert('Please choose your answer to question: ' + (i + 1));
-            document.getElementById(`answer-${i}`).focus;
+            //document.getElementById(`answer-${i}`).focus;
 
         } else {
             if (result === questions[i].answer) {
@@ -104,7 +104,8 @@ function checkResult() {
     }
     container.innerHTML = `
                                 <p class=final>Your final score is ${score} of ${questions.length}</p>
-                                <button type="submit" onclick="getQuestions(), document.location.reload(true)" class="btn btn-primary">Try Again</button>
+                                <button type="submit" onclick="getQuestions()" class="btn btn-primary">Try Again</button>
+                                <button type="submit" onclick="document.location.reload(true)" class="btn btn-primary">Select other categorie</button>
                            `;
 
 
