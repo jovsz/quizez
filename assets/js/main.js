@@ -1,5 +1,4 @@
 let questions = [];
-
 let score = 0;
 
 function getCategory() {
@@ -41,7 +40,7 @@ function getQuestions() {
             .then(response => response.json())
             .then((data) => printData(data.results));
     }
-    console.log(bool);
+
 }
 
 function printCategory(categoryData) {
@@ -54,13 +53,19 @@ function printCategory(categoryData) {
 
 
 function printData(data) {
+    document.getElementById('quiz-main').classList.toggle('hide');
     const container = document.getElementById('questions-container');
     let html = '';
 
+
+
     for (let i = 0; i < data.length; i++) {
+        var indice = Math.floor(Math.random() * data[i].incorrect_answers.length);
         questions.push({ question: data[i].question, answer: data[i].correct_answer });
-        data[i].incorrect_answers.push(data[i].correct_answer);
+        data[i].incorrect_answers.splice(indice, 0, data[i].correct_answer);
+
         if (data[i].incorrect_answers.length > 2) {
+
             html += `<h5 id="question"}">${i+1}.-${data[i].question}</h5>
                 <select id="answer-${i}"  class="form-select" aria-label="Default select example">
                     <option selected value=""></option>
@@ -82,7 +87,9 @@ function printData(data) {
     }
     html += `<button onclick="checkResult()" type="submit" class="btn btn-primary">Send Answers</button>`
     container.innerHTML = html;
+
 }
+
 
 function checkResult() {
     let score = 0;
@@ -102,15 +109,34 @@ function checkResult() {
         }
 
     }
+    let finalScore = ((score * 100) / questions.length);
+    console.log(finalScore);
+
+    if (finalScore >= 80 && finalScore <= 100) {
+        finalScore = 80;
+    }
+    if (finalScore >= 60 && finalScore < 80) {
+        finalScore = 60;
+    }
+    if (finalScore < 50) {
+        finalScore = 50;
+    }
     container.innerHTML = `
-                                <p class=final>Your final score is ${score} of ${questions.length}</p>
-                                <button type="submit" onclick="getQuestions()" class="btn btn-primary">Try Again</button>
+                            <p class="final-${finalScore}">Your final score is ${score} of ${questions.length}</p>
+                            <div class="buttons">
                                 <button type="submit" onclick="document.location.reload(true)" class="btn btn-primary">Select other categorie</button>
-                           `;
-
-
+                            </div> 
+                        `;
 
 }
 
+function resetQuestions() {
+    document.querySelectorAll('option').reset;
+}
+
+function resetResult() {
+    const container = document.getElementById('finalScore');
+    container.innerHTML = '';
+}
 
 getCategory();

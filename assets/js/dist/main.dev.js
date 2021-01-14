@@ -43,8 +43,6 @@ function getQuestions() {
       return printData(data.results);
     });
   }
-
-  console.log(bool);
 }
 
 function printCategory(categoryData) {
@@ -55,15 +53,17 @@ function printCategory(categoryData) {
 }
 
 function printData(data) {
+  document.getElementById('quiz-main').classList.toggle('hide');
   var container = document.getElementById('questions-container');
   var html = '';
 
   for (var i = 0; i < data.length; i++) {
+    var indice = Math.floor(Math.random() * data[i].incorrect_answers.length);
     questions.push({
       question: data[i].question,
       answer: data[i].correct_answer
     });
-    data[i].incorrect_answers.push(data[i].correct_answer);
+    data[i].incorrect_answers.splice(indice, 0, data[i].correct_answer);
 
     if (data[i].incorrect_answers.length > 2) {
       html += "<h5 id=\"question\"}\">".concat(i + 1, ".-").concat(data[i].question, "</h5>\n                <select id=\"answer-").concat(i, "\"  class=\"form-select\" aria-label=\"Default select example\">\n                    <option selected value=\"\"></option>\n                    <option value= \"").concat(data[i].incorrect_answers[0], "\">").concat(data[i].incorrect_answers[0], "</option>\n                    <option value= \"").concat(data[i].incorrect_answers[1], "\">").concat(data[i].incorrect_answers[1], "</option>\n                    <option value= \"").concat(data[i].incorrect_answers[2], "\">").concat(data[i].incorrect_answers[2], "</option>\n                    <option value= \"").concat(data[i].incorrect_answers[3], "\">").concat(data[i].incorrect_answers[3], "</option>\n                </select>\n                ");
@@ -92,7 +92,31 @@ function checkResult() {
     }
   }
 
-  container.innerHTML = "\n                                <p class=final>Your final score is ".concat(score, " of ").concat(questions.length, "</p>\n                                <button type=\"submit\" onclick=\"getQuestions()\" class=\"btn btn-primary\">Try Again</button>\n                                <button type=\"submit\" onclick=\"document.location.reload(true)\" class=\"btn btn-primary\">Select other categorie</button>\n                           ");
+  var finalScore = score * 100 / questions.length;
+  console.log(finalScore);
+
+  if (finalScore >= 80 && finalScore <= 100) {
+    finalScore = 80;
+  }
+
+  if (finalScore >= 60 && finalScore < 80) {
+    finalScore = 60;
+  }
+
+  if (finalScore < 50) {
+    finalScore = 50;
+  }
+
+  container.innerHTML = "\n                            <p class=\"final-".concat(finalScore, "\">Your final score is ").concat(score, " of ").concat(questions.length, "</p>\n                            <div class=\"buttons\">\n                                <button type=\"submit\" onclick=\"document.location.reload(true)\" class=\"btn btn-primary\">Select other categorie</button>\n                            </div> \n                        ");
+}
+
+function resetQuestions() {
+  document.querySelectorAll('option').reset;
+}
+
+function resetResult() {
+  var container = document.getElementById('finalScore');
+  container.innerHTML = '';
 }
 
 getCategory();

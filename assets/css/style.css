@@ -20,6 +20,11 @@ img {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    background-color: #322f3d;
+}
+
+.hide {
+    display: none;
 }
 
 .mb-3 {
@@ -53,10 +58,23 @@ p {
     flex-direction: column;
 }
 
-.final {
-    background-color: #df7861;
-    padding: 20px;
-    border-radius: 20px;
+.final-80 {
+    background-color: green;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.final-60 {
+    background-color: orange;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.final-50 {
+    background-color: rgb(197, 60, 60);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
 }
 
 #question {
